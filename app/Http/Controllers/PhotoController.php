@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Album;
 use Illuminate\Http\Request;
 
 class PhotoController extends Controller
@@ -11,9 +12,13 @@ class PhotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Album $album)
     {
-        //
+       //$data=auth()->user()->albums()->photos;
+
+        return (view('photos', ['album' => $album]));
+
+
     }
 
     /**

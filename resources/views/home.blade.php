@@ -42,19 +42,19 @@
                                     <div>{{ $item-> title }}</div>
                                 </td>
                                 <td>
-                                    <i class='fa fa-eye-slash' aria-hidden='true'></i>"
-                                        {{ ($item->is_public) == 1 ? "Публичный" :'<i class=fa fa-eye-slash aria-hidden=true></i>' }}
+                                    {{ ($item->is_public) == 1 ? "публичный" : "не публичный" }}
                                 </td>
                                 <td>
-                                    <form action="{{url('albums/'.$item->id)}}" method="POST">
+                                    <form action="{{url($item->id.'/photo')}}" method="GET">
                                         @csrf
-                                        <button class="btn btn-outline-success">Смотреть фото</button>
+                                        <button class="btn btn-outline-success" title="СМОТРЕТЬ ФОТО"><i class="fa fa-picture-o fa-3x fa-fw"></i></button>
                                     </form>
                                 </td>
                                 <td>
                                     <form action="{{url('albums/'.$item->id)}}" method="GET">
                                         @csrf
-                                        <button class="btn btn-outline-primary">Редактировать</button>
+
+                                        <button class="btn btn-outline-primary" title="РЕДАКТИРОВАТЬ"><i class="fa fa-pencil-square-o fa-3x fa-fw"></i></button>
                                     </form>
                                 </td>
                                 <td>
@@ -62,7 +62,7 @@
                                         @csrf
                                         @method('DELETE')
 
-                                        <button class="btn btn-outline-danger">Удалить</button>
+                                        <button class="btn btn-outline-danger" title="УДАЛИТЬ"><i class="fa fa-times fa-3x fa-fw"></i></button>
 
                                     </form>
                                 </td>

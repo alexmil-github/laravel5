@@ -10,10 +10,5 @@ class Photo extends Model
         'title', 'path', 'owner_id', 'album_id'
     ];
 
-    public function album()
-    {
-    return $this->hasOne(Album::class);
-    }
-
 
 }
