@@ -48,7 +48,7 @@ class AlbumController extends Controller
         $file = $request->file('image'); // $_FILES['image']
         $filename = uniqid() . '.' . $file->extension();
         $file->move(public_path() . '/uploads', $filename); // move_uploaded_file()
-        return $album
+        $album
             ->photos()
             ->create(
                 array_merge(
@@ -59,6 +59,7 @@ class AlbumController extends Controller
                     $request->all()
                 )
             );
+        return redirect('photo');
     }
 
 

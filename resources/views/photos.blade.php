@@ -28,23 +28,31 @@
                 </div>
             </div>
         </div>
-        <hr>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Фото</div>
-                    <div class="card-body">
-                        <div class="row">
 
-                            @if (count($data) > 0)
-                                привет
-                            @endif
+        @if (count($data) > 0)
+            <hr>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">Фото</div>
+                        <div class="card-body">
+                            <div class="row">
+                                @foreach($data as $item)
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <img class="card-img-top" src="{{ $item->path }}" alt="{{ $item->title }}">
+                                        <h5 class="card-header text-center">{{ $item->title }}</h5>
+                                        <p class="card-text">{{ $item->description }}</p>
+                                    </div>
+                                </div>
 
+                                @endforeach
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
     </div>
 @endsection

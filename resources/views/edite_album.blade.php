@@ -21,6 +21,11 @@
                             <label for="name">Название:</label>
                             <input type="text" name="title" id="title" value="{{ $data->title }}" class="form-control">
                         </div>
+                        <div class="form-group">
+                            <input type="hidden" id="is_public1" name="is_public" value="0" {{ ($data->is_public) == 1 ? "checked" : "" }}>
+                            <input type="checkbox" id="is_public" name="is_public" value="1" {{ ($data->is_public) == 1 ? "checked" : "" }}>
+                            <label for="is_public"><span>&nbsp;  Сделать публичным</span></label>
+                        </div>
 
                         <button class="btn btn-primary">Изменить</button>
                     </form>
