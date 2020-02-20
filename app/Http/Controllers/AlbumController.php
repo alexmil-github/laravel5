@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\User;
 use App\Album;
+use Illuminate\Http\Request;
 
 class AlbumController extends Controller
 {
@@ -43,7 +42,25 @@ class AlbumController extends Controller
         return redirect('home');
     }
 
+    public function uploadPhoto(Album $album, Request $request)
+    {
 
+        $file = $request->file('image'); // $_FILES['image']
+        $filename = uniqid() . '.' . $file->extension();
+        $file->move(public_path() . '/uploads', $filename); // move_uploaded_file()
+
+        return $album
+            ->photos()
+            ->create(
+                array_merge(
+                    [
+                        'url_original' => url('/public/uploads/' . $filename),
+                        'url_thumb' => '',
+                    ],
+                    $request->all()
+                )
+            );
+    }
 
 
 
