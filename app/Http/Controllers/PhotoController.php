@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Album;
+use App\Photo;
 use Illuminate\Http\Request;
 
 class PhotoController extends Controller
@@ -10,13 +11,14 @@ class PhotoController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Album $album
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Album $album)
+    public function index(Album $album, Request $request)
     {
-       //$data=auth()->user()->albums()->photos;
-
-        return (view('photos', ['album' => $album]));
+    $data = Photo::all();
+    return (view('photos', ['album' => $album, 'data' =>$data]));
 
 
     }
@@ -48,6 +50,8 @@ class PhotoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //получение одной фотографии
     public function show($id)
     {
         //

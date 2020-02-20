@@ -28,5 +28,23 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Фото</div>
+                    <div class="card-body">
+                        <div class="row">
+
+                            @if (count($data) > 0)
+                                привет
+                            @endif
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
