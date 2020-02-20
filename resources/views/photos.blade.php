@@ -8,15 +8,20 @@
                 <div class="card">
                     <div class="card-header">Загрузка фото</div>
                     <div class="card-body">
-
-                       {{ $album }}
-
-
                         <form action="../{{ $album->id }}/photos" enctype="multipart/form-data" method="POST">
                             @csrf
                             <div class="form-group">
+                                <label for="title">Название фото</label>
+                                <input type="text" class="form-control" id="title" name="title">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Описание</label>
+                                <input type="text" class="form-control" id="description" name="description">
+                            </div>
+                            <div class="form-group">
                                 <input type="file" class="form-control" id="image" name="image">
-                                <small class="form-text text-muted">Загрузка фото в формате jpg, png.</small> </div>
+                                <small class="form-text text-muted">фото в формате jpg, png.</small>
+                            </div>
                             <button type="submit" class="btn btn-primary">Загрузить</button>
                         </form>
                     </div>

@@ -54,6 +54,7 @@ class AlbumController extends Controller
                 array_merge(
                     [
                         'path' => url('/public/uploads/' . $filename),
+                        'album_id' =>$album->id,
                     ],
                     $request->all()
                 )
