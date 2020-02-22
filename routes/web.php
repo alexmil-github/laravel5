@@ -18,7 +18,7 @@
 //    return view('welcome', ['data' => $data]);
 //});
 
-Route::get('/', 'PhotoController@public')->middleware('auth'); //Вывод фото public
+Route::get('/', 'PhotoController@public'); //Вывод фото public
 
 
 
@@ -32,7 +32,7 @@ Route::delete('albums/{album}', 'AlbumController@destroy')->middleware('auth');
 
 Route::patch('albums/{album}/update', 'AlbumController@update')->middleware('auth');
 
-Route::get('albums/{album}', 'AlbumController@show')->middleware('auth'); //Вывод названий фотоальбомов для пользовтеля
+Route::get('albums/{album}', 'AlbumController@edit')->middleware('auth'); //Вывод названий фотоальбомов для пользовтеля
 
 Route::get('{album}/photo', 'PhotoController@index')->middleware('auth'); //Вывод страницы с фотками для конкретного фотоальбома
 
@@ -41,6 +41,8 @@ Route::post('{album}/photos', 'AlbumController@uploadPhoto')->middleware('auth')
 
 Route::delete('photo/{photo}', 'PhotoController@destroy')->middleware('auth');
 
+Route::get('photo/{photo}', 'PhotoController@edit')->middleware('auth');
 
+Route::patch('photo/{photo}/update', 'PhotoController@update')->middleware('auth');
 
 Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');

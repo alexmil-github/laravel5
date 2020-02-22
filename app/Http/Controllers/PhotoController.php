@@ -13,59 +13,29 @@ class PhotoController extends Controller
     {
 //    $data = Photo::all();
         $data = $album->photos;
-        return (view('photos', ['album' => $album, 'data' => $data]));
+        return (view('photo.photos', ['album' => $album, 'data' => $data]));
     }
 
 
-    public function create()
+    public function public(Photo $photo)
     {
-        //
-    }
-
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-
-    public function public(Photo $photo, Album $albums, Request $request)
-    {
-       // $public_albums = Album::all()->where('is_public', "=", "1"); //Создаем массив из публичных альбомов
-
-
         $public_photos = Photo::whereHas('album', function($query){
             $query->where('is_public', 1);
         })->get();
-
-
-
-
-  //      $data=[];
-
-       //перебираем элементы массива публичных альбомов
-//        foreach ($public_albums as $public_album) {
-            //Вытаскиваем фото из текущего публичного альбома
-      //     $items = $public_album->photos;
-           // $item= Photo::all()->where('album_id', '=', $public_album->id);
-          //  dd(count($items));
-      //  $data = array_merge($data, $item);
-
-//        }
-
      return (view('welcome', ['data' => $public_photos]));
     }
 
 
-    public function edit($id)
+    public function edit(Photo $photo)
     {
-        //
+        return (view('photo.edit_photo', ['data' => $photo]));
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Photo $photo)
     {
-        //
+        $photo->update($request->all());
+        return redirect($photo->album_id.'/photo');
     }
 
 
@@ -76,7 +46,7 @@ class PhotoController extends Controller
         Storage::disk('public')->delete(basename($photo->path));
 
         $photo->delete();
-      return redirect($photo->album_id.'/photo');
+        return redirect($photo->album_id.'/photo');
     }
 
 }

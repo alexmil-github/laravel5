@@ -21,9 +21,8 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <form action="../photo/{{ $item->id }}/update" method="POST" >
+                                            <form action="../photo/{{ $item->id }}" method="GET" >
                                                 @csrf
-                                                @method('PATCH')
                                                 <button class="btn btn-primary" >редактировать</button>
                                             </form>
                                         </div>

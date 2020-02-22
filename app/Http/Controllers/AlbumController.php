@@ -31,9 +31,9 @@ class AlbumController extends Controller
         return redirect('home');
     }
 
-    public function show(Album $album)
+    public function edit(Album $album)
     {
-        return (view('edite_album', ['data' => $album]));
+        return (view('album.edit_album', ['data' => $album]));
     }
 
     public function update(Request $request, Album $album)
