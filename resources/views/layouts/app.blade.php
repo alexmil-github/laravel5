@@ -15,9 +15,9 @@
     <script src="{{ asset('js/jquery.js') }}" defer></script>
 
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+{{--    <!-- Fonts -->--}}
+{{--    <link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
+{{--    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -78,7 +78,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4 bg-dark " >
             <div class="container">
             @yield('content')
             </div>

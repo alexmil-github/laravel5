@@ -11,6 +11,6 @@ class Album extends Model
     ];
 
     public function photos() {
-        return $this->hasMany(Photo::class, 'owner_id');
+        return $this->hasMany(Photo::class);
     }
 }

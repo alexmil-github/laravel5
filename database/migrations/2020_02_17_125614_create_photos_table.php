@@ -15,11 +15,12 @@ class CreatePhotosTable extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->string('description');
+            $table->string('title', 100);
+            $table->string('description', 500);
             $table->string('path', 200);
             $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('album_id');
+            $table->boolean('is_blocked')->default(0);
 
             $table->timestamps();
 

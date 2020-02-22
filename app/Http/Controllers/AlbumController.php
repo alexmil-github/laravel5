@@ -47,19 +47,20 @@ class AlbumController extends Controller
 
         $file = $request->file('image'); // $_FILES['image']
         $filename = uniqid() . '.' . $file->extension();
-        $file->move(public_path() . '/uploads', $filename); // move_uploaded_file()
+        $file->move(public_path() . '/storage', $filename); // move_uploaded_file()
         $album
             ->photos()
             ->create(
                 array_merge(
                     [
-                        'path' => url('/public/uploads/' . $filename),
+                        'path' => url('/public/storage/' . $filename),
                         'album_id' =>$album->id,
+                        'owner_id' =>auth()->user()->id,
                     ],
                     $request->all()
                 )
             );
-        return redirect('photo');
+        return redirect($album->id.'/photo');
     }
 
 

@@ -11,9 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+//Route::get('/', function () {
+//
+////    $data = DB::table('photos')->get();
+//    return view('welcome', ['data' => $data]);
+//});
+
+Route::get('/', 'PhotoController@public')->middleware('auth'); //Вывод фото public
+
+
 
 Auth::routes();
 
@@ -25,15 +32,14 @@ Route::delete('albums/{album}', 'AlbumController@destroy')->middleware('auth');
 
 Route::patch('albums/{album}/update', 'AlbumController@update')->middleware('auth');
 
-Route::get('albums/{album}', 'AlbumController@show')->middleware('auth'); //Вывод названий фотоальбомов
+Route::get('albums/{album}', 'AlbumController@show')->middleware('auth'); //Вывод названий фотоальбомов для пользовтеля
 
 Route::get('{album}/photo', 'PhotoController@index')->middleware('auth'); //Вывод страницы с фотками для конкретного фотоальбома
 
 
 Route::post('{album}/photos', 'AlbumController@uploadPhoto')->middleware('auth');
 
-
-
+Route::delete('photo/{photo}', 'PhotoController@destroy')->middleware('auth');
 
 
 

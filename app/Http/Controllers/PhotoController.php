@@ -5,89 +5,78 @@ namespace App\Http\Controllers;
 use App\Album;
 use App\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PhotoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @param Album $album
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function index(Album $album, Request $request)
     {
-    $data = Photo::all();
-    return (view('photos', ['album' => $album, 'data' =>$data]));
-
-
+//    $data = Photo::all();
+        $data = $album->photos;
+        return (view('photos', ['album' => $album, 'data' => $data]));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
-    //получение одной фотографии
-    public function show($id)
+    public function public(Photo $photo, Album $albums, Request $request)
     {
-        //
+       // $public_albums = Album::all()->where('is_public', "=", "1"); //Создаем массив из публичных альбомов
+
+
+        $public_photos = Photo::whereHas('album', function($query){
+            $query->where('is_public', 1);
+        })->get();
+
+
+
+
+  //      $data=[];
+
+       //перебираем элементы массива публичных альбомов
+//        foreach ($public_albums as $public_album) {
+            //Вытаскиваем фото из текущего публичного альбома
+      //     $items = $public_album->photos;
+           // $item= Photo::all()->where('album_id', '=', $public_album->id);
+          //  dd(count($items));
+      //  $data = array_merge($data, $item);
+
+//        }
+
+     return (view('welcome', ['data' => $public_photos]));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function destroy(Photo $photo)
     {
-        //
+
+//        Storage::delete($photo->path);
+        Storage::disk('public')->delete(basename($photo->path));
+
+        $photo->delete();
+      return redirect($photo->album_id.'/photo');
     }
+
 }

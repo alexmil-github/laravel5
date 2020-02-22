@@ -2,14 +2,13 @@
 
 @section('content')
 <div class="container">
-    <h1 class="text-center">Альбомы фотогалереи</h1>
+    <h1 class="text-center text-white">Альбомы фотогалереи</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Создание нового альбома</div>
 
                 <div class="card-body">
-                        {{--<form action="{{ auth()->user()->id }}/albums" method="post" class="form-horizontal">--}}
                         <form action="{{ auth()->user()->id }}/albums" method="post" class="form-horizontal">
                             @csrf
                             <div class="form-group">
@@ -42,7 +41,7 @@
                                     <div>{{ $item-> title }}</div>
                                 </td>
                                 <td>
-                                    {{ ($item->is_public) == 1 ? "публичный" : "не публичный" }}
+                                    <p class="text-primary">{{ ($item->is_public) == 1 ? "публичный" : "" }}</p>
                                 </td>
                                 <td>
                                     <form action="{{url($item->id.'/photo')}}" method="GET">
