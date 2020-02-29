@@ -34,11 +34,13 @@
                         </div>
                         <div class="form-group">
                             <label for="album_id">Альбом:</label>
+                            @if (count($albums) > 0)
                             <select id="album_id" name="album_id" class="form-control">
                                 @foreach($albums as $album)
                                     <option value={{ $album->id }}>{{ $album->title }}</option>
                                 @endforeach
                             </select>
+                            @endif
                         </div>
 
                     </form>
