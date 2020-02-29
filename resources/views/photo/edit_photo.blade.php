@@ -1,3 +1,8 @@
+@php
+    $albums=auth()->user()->albums;
+@endphp
+
+
 @extends('layouts.app')
 
 @section('content')
@@ -23,9 +28,17 @@
                             <input type="text" name="title" id="title" value="{{ $data->title }}" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="name">Описание:</label>
-                            <input type="text" name="description" id="title" value="{{ $data->description }}"
+                            <label for="description">Описание:</label>
+                            <input type="text" name="description" id="description" value="{{ $data->description }}"
                                    class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="album_id">Альбом:</label>
+                            <select id="album_id" name="album_id" class="form-control">
+                                @foreach($albums as $album)
+                                    <option value={{ $album->id }}>{{ $album->title }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                     </form>
